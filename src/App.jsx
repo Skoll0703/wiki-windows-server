@@ -1,55 +1,49 @@
-import {BrowserRouter, Routes, Route, Link} from "react-router-dom"
+import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom"
 
-import Inicio from "./componentes/Inicio"
-import Instalacion from "./componentes/Instalacion"
 import ActiveDirectory from "./componentes/ActiveDirectory"
 import Cliente from "./componentes/Cliente"
-import ServiciosRed from "./componentes/ServiciosRed"
 import Gpo from "./componentes/Gpo"
+import Inicio from "./componentes/Inicio"
+import Instalacion from "./componentes/Instalacion"
 import Prompts from "./componentes/Prompts"
+import ServiciosRed from "./componentes/ServiciosRed"
 
+function App() {
+  const linkClass = ({ isActive }) =>
+    `rounded-full px-3 py-2 text-sm transition ${isActive ? "bg-cyan-600 text-white" : "text-slate-200 hover:bg-slate-800 hover:text-white"}`
 
-function App(){
+  return (
+    <BrowserRouter>
+      <div className="min-h-screen bg-slate-50 text-slate-800">
+        <nav className="border-b border-slate-200 bg-slate-900/95 text-white backdrop-blur">
+          <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-2 px-4 py-4">
+            <span className="mr-2 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300">
+              Wiki RIQCHR
+            </span>
+            <NavLink to="/" className={linkClass}>Inicio</NavLink>
+            <NavLink to="/instalacion" className={linkClass}>Instalación</NavLink>
+            <NavLink to="/ad" className={linkClass}>Active Directory</NavLink>
+            <NavLink to="/cliente" className={linkClass}>Cliente</NavLink>
+            <NavLink to="/red" className={linkClass}>Servicios</NavLink>
+            <NavLink to="/gpo" className={linkClass}>GPO</NavLink>
+            <NavLink to="/ia" className={linkClass}>IA</NavLink>
+          </div>
+        </nav>
 
-return(
-
-<BrowserRouter>
-
-<div className="min-h-screen bg-gray-100">
-
-
-<nav className="p-4 bg-slate-900 text-white flex gap-4">
-
-<Link to="/">Inicio</Link>
-<Link to="/instalacion">Instalación</Link>
-<Link to="/ad">Active Directory</Link>
-<Link to="/cliente">Cliente</Link>
-<Link to="/red">Servicios</Link>
-<Link to="/gpo">GPO</Link>
-<Link to="/ia">IA</Link>
-
-</nav>
-
-
-<Routes>
-
-<Route path="/" element={<Inicio/>}/>
-<Route path="/instalacion" element={<Instalacion/>}/>
-<Route path="/ad" element={<ActiveDirectory/>}/>
-<Route path="/cliente" element={<Cliente/>}/>
-<Route path="/red" element={<ServiciosRed/>}/>
-<Route path="/gpo" element={<Gpo/>}/>
-<Route path="/ia" element={<Prompts/>}/>
-
-</Routes>
-
-
-</div>
-
-</BrowserRouter>
-
-)
-
+        <main className="mx-auto w-full max-w-6xl px-4 py-8">
+          <Routes>
+            <Route path="/" element={<Inicio />} />
+            <Route path="/instalacion" element={<Instalacion />} />
+            <Route path="/ad" element={<ActiveDirectory />} />
+            <Route path="/cliente" element={<Cliente />} />
+            <Route path="/red" element={<ServiciosRed />} />
+            <Route path="/gpo" element={<Gpo />} />
+            <Route path="/ia" element={<Prompts />} />
+          </Routes>
+        </main>
+      </div>
+    </BrowserRouter>
+  )
 }
 
 export default App
